@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}404 Not Found | {{ block.super }}{% endblock %}
+{% block subtitle %}Not found{% endblock %}
+
+{% block content %}
+    <div class="alert alert-danger mt-3" role="alert">
+    	<h4 class="alert-heading">Not found</h4>
+    	Please check if URL is correct and ToDo exists.
+	</div>
+{% endblock %}

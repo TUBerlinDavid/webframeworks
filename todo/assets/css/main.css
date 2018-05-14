@@ -1,0 +1,48 @@
+.column-text {
+    width: auto;
+}
+
+.column-progress {
+    width: 12%;
+}
+
+.column-deadline {
+    width: 16%;
+}
+
+.column-actions {
+    width: 60px;
+}
+
+.text-break {
+    word-break: break-word;
+}
+
+.bg-darker {
+    background-color: rgba(50, 50, 50, .1);
+}
+
+/* Bootstrap overwrites */
+.custom-range::-webkit-slider-thumb {
+    background-color: var(--dark);
+}
+
+.custom-range::-webkit-slider-thumb:active {
+    background-color: var(--secondary);
+}
+
+.custom-range::-moz-range-thumb {
+    background-color: var(--dark);
+}
+
+.custom-range::-moz-range-thumb:active {
+    background-color: var(--secondary);
+}
+
+.custom-range::-ms-thumb {
+    background-color: var(--dark);
+}
+
+.custom-range::-ms-thumb:active {
+    background-color: var(--secondary);
+}

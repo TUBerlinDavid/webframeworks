@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit ToDo #{{ todo.id }} | {{ block.super }}{% endblock %}
+{% block subtitle %}Edit ToDo #{{ todo.id }}{% endblock %}
+
+{% block content %}
+    <form action="{% url 'edit' todo.id %}" method="post" class="mt-3">
+        {% csrf_token %}
+        {% load form_extras %}
+        {{ form.non_field_errors.as_ul }}
+
+        {% for field in form %}
+            <div class="form-group row">
+                <label for="{{ field.id_for_label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
+                <div class="col-sm-10">
+                    {{ field|addClassOnError:'is-invalid' }}
+                    {% if field.errors %}
+                        <div class="invalid-feedback">{{ field.errors|first|escape }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <input type="submit" class="btn btn-dark" value="Update" />
+            </div>
+        </div>
+    </form>
+{% endblock %}

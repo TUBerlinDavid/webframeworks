@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Overview | {{ block.super }}{% endblock %}
+{% block subtitle %}Overview{% endblock %}
+
+{% block content %}
+    {% if todo_list %}
+        {% load svg %}
+        <table class="table table-striped table-hover table-sm mt-2 mb-2">
+            <colgroup>
+                <col class="column-text">
+                <col class="column-progress">
+                <col class="column-deadline">
+                <col class="column-actions">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="border-top-0">Task</th>
+                    <th class="border-top-0">Progress</th>
+                    <th class="border-top-0">Deadline</th>
+                    <th class="border-top-0"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in todo_list %}
+                    <tr>
+                        <td class="text-break">
+                            {{ todo.task|truncatewords:60 }}
+                        </td>
+                        <td class="align-middle">
+                            <div class="progress bg-darker">
+                                <div class="progress-bar bg-success w-{{ todo.progress }}" role="progressbar" aria-valuenow="{{ todo.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ todo.progress }}%">{{ todo.progress }}%</div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                            {{ todo.deadline_date|date:'jS M Y'|default:'—' }}
+                        </td>
+                        <td class="align-middle text-nowrap">
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'edit' todo.id %}" class="d-inline-flex mr-2 action-edit" data-id="{{ todo.id }}">
+                                    {% svg 'edit' %}
+                                </a>
+                                <a href="{% url 'delete' todo.id %}" class="d-inline-flex action-delete" data-id="{{ todo.id }}">
+                                    {% svg 'delete' %}
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info mt-3" role="alert">No ToDos available!</div>
+    {% endif %}
+
+    <a href="{% url 'add' %}" role="button" class="btn btn-dark btn-sm mt-1">Add</a>
+{% endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <title>{% block title %}ToDo-Tracker{% endblock %}</title>
+
+        <!-- Bootstrap CSS -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    </head>
+    <body class="d-flex flex-column h-100">
+        <header class="navbar navbar-dark bg-dark flex-shrink-0">
+            <h1 class="navbar-brand m-0">
+                <a href="{% url 'index' %}" class="text-white">ToDo-Tracker</a>
+                <small class="text-muted ml-2">{% block subtitle %}{% endblock %}</small>
+            </h1>
+        </header>
+
+        <main class="container-fluid flex-fill">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} mt-3" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="d-block pt-3 pb-3 mt-3 align-middle text-center bg-light border-top">
+            <p class="m-0 pl-3 pr-3 text-black-50">Built with <span class="text-danger">♥</span> for <a href="https://www.cit.tu-berlin.de/menue/teaching/sommersemester_18/programmierpraktikum_soziale_netzwerke_ppsn/" class="text-dark" target="_blank">Programmierpraktikum: Soziale Netzwerke</a> | <a href="{% url 'imprint' %}" class="text-dark">Imprint</a></p>
+        </footer>
+        
+        {% block scripts %}{% endblock %}
+    </body>
+</html>
